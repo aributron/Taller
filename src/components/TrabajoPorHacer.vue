@@ -49,7 +49,7 @@ export default {
       const listaAux = listaVehiculos.filter((a)=>(a.codigo>2));
       return listaAux;
     }
-    
+  
   }
 };
 </script>

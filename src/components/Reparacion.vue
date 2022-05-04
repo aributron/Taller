@@ -26,11 +26,6 @@ export default {
     },
     methods: {
         calcularPrecio() {
-
-            //RECORRER LISTA DE REPUESTOS DE LA REPARACION
-            //CALCULAR IMPORTE (PRECIO REPUESTO X CANTIDAD)
-            //CALCULAR IMPORTE MANO DE OBRA (HORAS X PRECIO)
-            //SUMAR IMPORTES
             console.log('Aca se calcula el precio');
         }
     }
