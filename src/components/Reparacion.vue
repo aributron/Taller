@@ -21,12 +21,15 @@ export default {
             [{nombre: "Correa de distribucion", precio: 2000},
             {nombre: "Filtro de aire", precio: 1000},
             {nombre: "Bomba de agua", precio: 1500}],
-            
         }
     },
     methods: {
         calcularPrecio() {
             console.log('Aca se calcula el precio');
+            //RECORRER LISTA DE REPUESTOS DE LA REPARACION
+            //CALCULAR IMPORTE (PRECIO REPUESTO X CANTIDAD)
+            //CALCULAR IMPORTE MANO DE OBRA (HORAS X PRECIO)
+            //SUMAR IMPORTES
         }
     }
     
