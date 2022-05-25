@@ -30,12 +30,12 @@ export default {
   },
   methods: {
       
-    login() {
-      const loggedIn = localStorage.getItem('usuario');
+    async login() {
+      //const loggedIn = localStorage.getItem('usuario');
       const copiaUsuario = { ...this.usuario };
-      this.login(copiaUsuario);
-      console.log(loggedIn);
-      if (loggedIn != null) {
+      await this.login(copiaUsuario);
+      console.log(this.estaLogeado);
+      if (this.estaLogeado) {
         this.$router.push("/vehiculo");
       } else {
         this.$router.push("/");

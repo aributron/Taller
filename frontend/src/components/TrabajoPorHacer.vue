@@ -1,11 +1,14 @@
 <template>
-  <div>Sistema de Taller - Trabajo por hacer</div>
 
-  <div>{{ listaVehiculos }}  <br/>
-  {{ mostrarListaFiltrada(listaVehiculos) }}  <br/>
-    Codigo <input type="text" v-model="vehiculo.codigo">
-    Descripcion <input type="text" v-model="vehiculo.descripcion"> 
+  <div>
+  <h1>Sistema de Taller - Trabajo por hacer</h1>
+
+    {{ listaVehiculos }}  <br/>
+ 
+    Codigo <input type="text" v-model="this.vehiculo.codigo"/>
+    Descripcion <input type="text" v-model="this.vehiculo.descripcion"/> 
     <button @click="agregar">Agregar Vehiculo</button>  
+    
   </div>
 
 </template>
@@ -41,7 +44,15 @@ export default {
       this.aumentar();
     },
     agregar() {
-      this.agregarVehiculo({...this.vehiculo}); 
+      try {
+        const copiaVehiculo = {...this.vehiculo};
+        console.log(copiaVehiculo);
+        //this.agregarVehiculo({...this.vehiculo}); 
+        this.agregarVehiculo(copiaVehiculo);
+      }catch(error){
+
+        console.log(error);
+      }
       // this.agregarVehiculo([...this.producto,producto]); 
     },
     mostrarListaFiltrada(listaVehiculos){
