@@ -1,42 +1,76 @@
 
 <template>
     <div>
-        <h2>Sistema de Taller - Reparación</h2>
-        
+
+        <h2>Lista de repuestos</h2>
+        <li v-for="repuesto in lista" :key="repuesto.codigo">
+            {{ repuesto.precio }} {{ repuesto.nombre }}
+            <button @click="agregar(repuesto)">Agregar</button>
+        </li>
+        {{ mensajeError }}
+
+        <h2>Repuestos a utilizar</h2>
+        <li v-for="repuesto in listaStore" :key="repuesto.codigo">
+            {{ repuesto.precio }} {{ repuesto.nombre }}
+            <button @click="eliminar(repuesto)">Eliminar</button>
+        </li>
+        <br>
+        <p> 
+            El precio total acumulado es: ${{ precioTotal }}
+        </p>    
     </div>
 </template>
 
 <script>
-import Vehiculo from '../components/Vehiculo.vue'
-export default {
-    components: {Vehiculo},
-    data() {
-        return {
-           
-            estado : 
-            [{nombre:"En proceso"}, {nombre:"Terminado"}, 
-            {nombre:"Stand by"}],
-            horasEstimadas : 2,
-            repuestos :
-            [{nombre: "Correa de distribucion", precio: 2000},
-            {nombre: "Filtro de aire", precio: 1000},
-            {nombre: "Bomba de agua", precio: 1500}],
-            
-        }
-    },
-    methods: {
-        calcularPrecio() {
+import repuestoService from "../services/repuestoService.js";
 
-            //RECORRER LISTA DE REPUESTOS DE LA REPARACION
-            //CALCULAR IMPORTE (PRECIO REPUESTO X CANTIDAD)
-            //CALCULAR IMPORTE MANO DE OBRA (HORAS X PRECIO)
-            //SUMAR IMPORTES
-            console.log('Aca se calcula el precio');
-        }
+export default {
+  data() {
+    return {
+      lista: [],
+      listaStore: [],
+      repuesto: { codigo: 0, nombre: "", precio: 0 },
+      mensajeError: "",
+      precioTotal: 0
+    };
+  },
+  created: async function () {
+    try {
+      const rta = await repuestoService.getRepuestos(); 
+      this.lista = rta.data;
+    } catch (error) {
+      this.mensajeError = "No se pudo obtener los datos ";
+      console.log(error.error);
+    }
+  },
+  methods: {
+    agregar(obj) {
+      try {
+        this.listaStore.push(obj);
+        this.calcular(obj.precio);
+      } catch (error) {
+        this.mensajeError = "No se pudo obtener los datos ";
+        console.log(error.error);
+      }
+    },
+    calcular(num) {
+        this.precioTotal+= num;
+    },
+    eliminar(obj) {
+      try {
+        const indice = this.listaStore.indexOf(obj)
+        this.listaStore.splice(indice, 1);
+        this.calcular(-obj.precio);
+
+      } catch (error) {
+        this.mensajeError = "No se pudo obtener los datos ";
+        console.log(error.error);
+      }
+
     }
     
-}
-
+  },
+};
 </script>
 
 

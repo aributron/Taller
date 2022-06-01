@@ -17,17 +17,17 @@ const apiClient = axios.create({
 })
 
 export default {
-    getVendedores() {
-        return apiClient.get('/api/lista');
+    getVehiculos() {
+        return apiClient.get('/api/vehiculos');
     },
-    setVendedor(vendedor) {
-        return apiClient.post('/api/setvendedor', vendedor);
+    setVehiculo(vehiculo) {
+        return apiClient.post('/api/setvehiculo', vehiculo);
     },
-    deleteVendedor(codigo) {
-        return apiClient.delete('/api/vendedor/' + codigo);
+    deleteVehiculo(codigo) {
+        return apiClient.delete('/api/vehiculo/' + codigo);
     },
-    modificarVendedor(vendedor) {
+    modificarVehiculo(vehiculo) {
         // chequear
-        return apiClient.put('/api/setvendedor', vendedor)
+        return apiClient.put('/api/setvehiculo', vehiculo)
     }
 }

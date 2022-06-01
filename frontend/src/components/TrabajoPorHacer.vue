@@ -1,5 +1,5 @@
 <template>
-
+  <!-- MUESTRA EL AUTO, LOS REPUESTOS (Y SI ESTAN INSTALADOS O NO), EL ESTADO DEL AUTO EN GENERAL (TODOS EN UN OBJ TRABAJO) -->
   <div>
   <h1>Sistema de Taller - Trabajo por hacer</h1>
 
@@ -28,15 +28,14 @@ export default {
       contador,
       aumentar,
       agregarVehiculo,
-      listaVehiculos,
-      
+      listaVehiculos,     
     };
   },
   data() {
    
     return {
       vehiculo: {codigo:0, descripcion: ""}
-    }
+    };
   },
   methods: {
     cambio() {
@@ -46,8 +45,8 @@ export default {
     agregar() {
       try {
         const copiaVehiculo = {...this.vehiculo};
-        console.log(copiaVehiculo);
-        //this.agregarVehiculo({...this.vehiculo}); 
+        //console.log(copiaVehiculo);
+        //this.agregarVehiculo({ ...this.vehiculo });
         this.agregarVehiculo(copiaVehiculo);
       }catch(error){
 

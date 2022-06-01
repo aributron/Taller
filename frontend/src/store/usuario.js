@@ -18,10 +18,8 @@ export const usuarioStore = defineStore('main', {
         async login(obj) {
             try {
                 const data = await axios.post('http://localhost:3001/api/login',obj)
-                //console.log(data);
                 this.usuario = obj;
                 this.estaLogeado = true;
-                //console.log(this.estaLogeado);
                 localStorage.setItem('usuario',  JSON.stringify(this.usuario) )
             } catch(error) {
                 console.log(error);

@@ -3,8 +3,8 @@
   <div>
     
   
-      <div v-if="!estaLogeado">
         <router-link to="/">Go to Home</router-link>|
+      <div v-if="!estaLogeado">
         <router-link to="/login">Login</router-link> |
       </div>
       <div v-if="estaLogeado">
