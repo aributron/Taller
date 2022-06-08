@@ -3,7 +3,7 @@
         <h2>Sistema de Taller - Vehiculo</h2>
         Alta de vehiculo    
         <li v-for="vehiculo in lista" :key="vehiculo.id">
-            {{ vehiculo.patente }} {{ vehiculo.modelo }} {{ vehiculo.estado }}
+            {{ vehiculo.patente }} {{ vehiculo.modelo }}
             <button @click="eliminar(vehiculo.id)">Siempre anular</button>
         </li>
         <div>
@@ -11,7 +11,6 @@
             Id <input type="text" v-model="vehiculo.id" /> 
             Patente <input type="text" v-model="vehiculo.patente" /> 
             Modelo <input type="text" v-model="vehiculo.modelo" />
-            Estado <input type="text" v-model="vehiculo.estado" />
             <button @click="agregar">Agregar vehiculo</button>
         </p>
         </div>
@@ -26,7 +25,7 @@ export default {
   data() {
     return {
       lista: [],
-      vehiculo: { id: 0, patente: "", modelo: "", estado: "" },
+      vehiculo: { id: 0, patente: "", modelo: ""},
       mensajeError: "",
     };
   },

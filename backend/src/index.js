@@ -33,7 +33,7 @@ const lista = [
 ];
 
 const vehiculos = [
-  {id:0, patente: "ABC123", modelo: "Gol", estado: "En proceso"}
+  {id:0, patente: "ABC123", modelo: "Gol"}
 ];
 
 const repuestos = [
@@ -44,8 +44,10 @@ const repuestos = [
 
 const trabajos = [
   {vehiculo: 
-    {id:0, patente: "ABC123", modelo: "Gol", estado: "En proceso"}, 
-  repuestos: []}
+    {id:0, patente: "ABC123", modelo: "Gol"}, 
+    estado: "En proceso",
+    repuestos: []
+  }
 ];
 
 //sacar estado de vehiculo y ponerselo a trabajos.
@@ -58,6 +60,11 @@ app.get('/api/lista', (req,res) => {
 app.get('/api/vehiculos', (req,res) => {
   // CONSULTA A BASE DE DATOS
   res.json(vehiculos);
+})
+
+app.get('/api/vehiculos/:patente', (req,res) => {
+  const listaCopia = vehiculos.filter( e => e.patente == req.params.patente )
+  res.json(listaCopia);
 })
 
 app.get('/api/repuestos', (req,res) => {

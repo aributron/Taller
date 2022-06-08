@@ -9,6 +9,15 @@
         </li>
         {{ mensajeError }}
 
+        <div>
+            <input type="text" v-model="pat" />
+            <button @click="buscarVehiculos(pat)"> Buscar </button> 
+        </div>
+
+        <li v-for="vehiculo in listaVehiculos" :key="vehiculo.patente">
+            {{ vehiculo.patente }} {{ vehiculo.modelo }}
+        </li>
+
         <h2>Repuestos a utilizar</h2>
         <li v-for="repuesto in listaStore" :key="repuesto.codigo">
             {{ repuesto.precio }} {{ repuesto.nombre }}
@@ -23,15 +32,19 @@
 
 <script>
 import repuestoService from "../services/repuestoService.js";
+import vehiculoService from "../services/vehiculoService.js";
 
 export default {
   data() {
     return {
       lista: [],
-      listaStore: [],
+      listaVehiculos: [],
       repuesto: { codigo: 0, nombre: "", precio: 0 },
+      listaStore: [],
+      vehiculo: {id:0, patente: "ABC122", modelo: "Gol"},
       mensajeError: "",
-      precioTotal: 0
+      precioTotal: 0,
+      buscar: ''
     };
   },
   created: async function () {
@@ -43,6 +56,7 @@ export default {
       console.log(error.error);
     }
   },
+  
   methods: {
     agregar(obj) {
       try {
@@ -67,8 +81,17 @@ export default {
         console.log(error.error);
       }
 
+    },
+    async buscarVehiculos(pat) {
+     try {
+      const rta = await vehiculoService.getVehiculos();
+      
+      this.listaVehiculos = rta.data.filter( e => e.patente == pat );
+    } catch (error) {
+      this.mensajeError = "No se pudo obtener los datos ";
+      console.log(error.error);
     }
-    
+    },
   },
 };
 </script>

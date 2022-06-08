@@ -15,7 +15,7 @@
 
 <script>
 import { useStore } from "../store/store.js";
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
 
 export default {
   setup() {
@@ -28,7 +28,7 @@ export default {
       contador,
       aumentar,
       agregarVehiculo,
-      listaVehiculos,     
+      listaVehiculos,    
     };
   },
   data() {

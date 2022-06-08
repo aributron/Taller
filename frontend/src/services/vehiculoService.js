@@ -20,6 +20,9 @@ export default {
     getVehiculos() {
         return apiClient.get('/api/vehiculos');
     },
+    getVehiculosPorPatente(patente) {
+        return apiClient.get('/api/vehiculos/:patente');
+    },
     setVehiculo(vehiculo) {
         return apiClient.post('/api/setvehiculo', vehiculo);
     },
