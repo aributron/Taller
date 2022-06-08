@@ -43,8 +43,8 @@ const repuestos = [
 ];
 
 const trabajos = [
-  {vehiculo: 
-    {id:0, patente: "ABC123", modelo: "Gol"}, 
+  { id: 1, 
+    vehiculo: {id:0, patente: "ABC123", modelo: "Gol"}, 
     estado: "En proceso",
     repuestos: []
   }
@@ -57,19 +57,24 @@ app.get('/api/lista', (req,res) => {
   res.json(lista);
 })
 
+app.get('/api/trabajos', (req,res) => {
+  // CONSULTA A BASE DE DATOS
+  res.json(trabajos);
+})
+
 app.get('/api/vehiculos', (req,res) => {
   // CONSULTA A BASE DE DATOS
   res.json(vehiculos);
 })
 
-app.get('/api/vehiculos/:patente', (req,res) => {
-  const listaCopia = vehiculos.filter( e => e.patente == req.params.patente )
-  res.json(listaCopia);
-})
-
 app.get('/api/repuestos', (req,res) => {
   // CONSULTA A BASE DE DATOS
   res.json(repuestos);
+})
+
+app.get('/api/vehiculos/:patente', (req,res) => {
+  const listaCopia = vehiculos.filter( e => e.patente == req.params.patente )
+  res.json(listaCopia);
 })
 
 app.get('/api/lista/:codigo', (req,res) => {
@@ -87,6 +92,11 @@ app.post('/api/setrepuesto', (req,res) => {
   lista.push(req.body);
 })
 
+app.post('/api/settrabajo', (req,res) => {
+  req.body.id = Number(req.body.id)
+  trabajos.push(req.body);
+})
+
 app.post('/api/setvehiculo', (req,res) => {
   req.body.id = Number(req.body.id)
   vehiculos.push(req.body);
@@ -98,10 +108,11 @@ app.delete('/api/repuestos/:codigo', (req,res) => {
   lista.splice(indice,1);
 })
 
-/*app.post('/api/setrepuesto', (req,res) => {
-  // revisar
+app.delete('/api/trabajos/:id', (req,res) => {
+  const listaIds = trabajos.map( e => { return e.id } )
+  const indice = listaIds.indexOf(Number(req.params.id))
+  trabajos.splice(indice,1);
 })
-*/
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

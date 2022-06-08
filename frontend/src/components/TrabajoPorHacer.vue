@@ -1,47 +1,50 @@
 <template>
   <!-- MUESTRA EL AUTO, LOS REPUESTOS (Y SI ESTAN INSTALADOS O NO), EL ESTADO DEL AUTO EN GENERAL (TODOS EN UN OBJ TRABAJO) -->
   <div>
-  <h1>Sistema de Taller - Trabajo por hacer</h1>
+  <h1>Trabajo por hacer</h1>
 
-    {{ listaVehiculos }}  <br/>
- 
-    Codigo <input type="text" v-model="this.vehiculo.codigo"/>
-    Descripcion <input type="text" v-model="this.vehiculo.descripcion"/> 
-    <button @click="agregar">Agregar Vehiculo</button>  
-    
+    {{ trabajos }}  <br/>
+    <!-- REVISAR -> MOSTRAR VARIAS LISTAS 
+    HACER CRUD DE CLIENTES
+    -->
+    <li v-for="trabajo in trabajos" :key="trabajo.id">
+            {{ trabajo.vehiculo.patente }} {{ trabajo.estado }}
+            <ul v-for="repuesto in trabajo.repuestos" :key="repuesto.codigo"> {{ repuesto.nombre }} 
+            </ul>
+    </li>
   </div>
 
 </template>
 
 <script>
-import { useStore } from "../store/store.js";
-import { storeToRefs } from 'pinia';
+
+import trabajoService from "../services/trabajoService.js";
 
 export default {
-  setup() {
-    const store = useStore();
-    const { contador, listaVehiculos } = storeToRefs(store);
-    const { aumentar, agregarVehiculo } = store;
-    return {
-      // you can return the whole store instance to use it in the template
-      store,
-      contador,
-      aumentar,
-      agregarVehiculo,
-      listaVehiculos,    
-    };
-  },
+  
   data() {
-   
     return {
+      trabajos: [],
+      trabajo: 
+      { id: 1, 
+        vehiculo: {id:0, patente: "", modelo: ""}, 
+        estado: "En proceso",
+        repuestos: []
+      },    
       vehiculo: {codigo:0, descripcion: ""}
     };
   },
+  created: async function () {
+    try {
+      const rta = await trabajoService.getTrabajos(); 
+      this.trabajos = rta.data;
+    } catch (error) {
+      this.mensajeError = "No se pudo obtener los datos ";
+      console.log(error.error);
+    }
+  },
   methods: {
-    cambio() {
-      // console.log('cambio');
-      this.aumentar();
-    },
+    
     agregar() {
       try {
         const copiaVehiculo = {...this.vehiculo};
