@@ -3,15 +3,45 @@
   <div>
   <h1>Trabajo por hacer</h1>
 
-    {{ trabajos }}  <br/>
-    <!-- REVISAR -> MOSTRAR VARIAS LISTAS 
-    HACER CRUD DE CLIENTES
-    -->
-    <li v-for="trabajo in trabajos" :key="trabajo.id">
-            {{ trabajo.vehiculo.patente }} {{ trabajo.estado }}
-            <ul v-for="repuesto in trabajo.repuestos" :key="repuesto.codigo"> {{ repuesto.nombre }} 
-            </ul>
-    </li>
+      <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <p>Patente </p>
+                </th>
+                <th>
+                    <p>Estado</p>
+                </th>
+                <th>
+                    <p>Presupuesto </p>
+                </th>
+                <th>
+                    <p>Cliente </p>
+                </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr v-for="trabajo in trabajos" :key="trabajo.id">
+            
+            <td>
+               {{ trabajo.vehiculo.patente }} 
+            </td>
+            <td>
+                {{ trabajo.estado }} 
+            </td>
+            <td>
+                ${{ trabajo.total }} 
+            </td>
+            <td>
+                {{ trabajo.vehiculo.clienteId }}
+            </td>
+            <button @click="finalizar(trabajo)">Finalizar</button>
+          </tr>
+         
+        </tbody>
+      </table>
+      
   </div>
 
 </template>
@@ -19,6 +49,7 @@
 <script>
 
 import trabajoService from "../services/trabajoService.js";
+import clienteService from "../services/clienteService.js";
 
 export default {
   
@@ -27,16 +58,18 @@ export default {
       trabajos: [],
       trabajo: 
       { id: 1, 
-        vehiculo: {id:0, patente: "", modelo: ""}, 
+        vehiculo: {id:0, patente: "", modelo: "", clienteId: 0}, 
         estado: "En proceso",
-        repuestos: []
-      },    
-      vehiculo: {codigo:0, descripcion: ""}
+        repuestos: [],
+        presupuesto: 0,
+      },
+      cliente: {id: 0, nombre: "", apellido: "", telefono: ""},
+      valor: 0
     };
   },
   created: async function () {
     try {
-      const rta = await trabajoService.getTrabajos(); 
+      const rta = await trabajoService.getTrabajos();
       this.trabajos = rta.data;
     } catch (error) {
       this.mensajeError = "No se pudo obtener los datos ";
@@ -48,19 +81,35 @@ export default {
     agregar() {
       try {
         const copiaVehiculo = {...this.vehiculo};
-        //console.log(copiaVehiculo);
-        //this.agregarVehiculo({ ...this.vehiculo });
         this.agregarVehiculo(copiaVehiculo);
-      }catch(error){
 
+      }catch(error){
         console.log(error);
       }
-      // this.agregarVehiculo([...this.producto,producto]); 
+
     },
     mostrarListaFiltrada(listaVehiculos){
 
       const listaAux = listaVehiculos.filter((a)=>(a.codigo>2));
       return listaAux;
+    },
+    async getClienteId(){
+      console.log('hola');
+      const cliente = await this.getClienteId(this.trabajo.vehiculo.clienteId);
+      //const cliente = await clienteService.getCliente(num);
+      return cliente;
+    },
+    finalizar(trab) {
+    
+      try {
+        const indice = this.trabajos.indexOf(trab)
+        this.trabajos[indice].estado = "finalizado";
+        
+
+      } catch (error) {
+        this.mensajeError = "No se pudo obtener los datos ";
+        console.log(error.error);
+      }
     }
     
   }
@@ -68,4 +117,7 @@ export default {
 </script>
 
 <style>
+  tbody {
+            background: #000000;
+        }
 </style>

@@ -1,7 +1,11 @@
 <template>
-    <div>
+    
+    <div id = "pepe">
         <h2>Sistema de taller - Home</h2>            
     </div>
+           
+    <!-- <body id = "pepe">
+    </body> -->
 </template>
 
 <script>

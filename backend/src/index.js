@@ -33,7 +33,7 @@ const lista = [
 ];
 
 const vehiculos = [
-  {id:0, patente: "ABC123", modelo: "Gol"}
+  {id:0, patente: "ABC123", modelo: "Gol", clienteId: 1}
 ];
 
 const repuestos = [
@@ -46,30 +46,40 @@ const trabajos = [
   { id: 1, 
     vehiculo: {id:0, patente: "ABC123", modelo: "Gol"}, 
     estado: "En proceso",
-    repuestos: []
+    repuestos: [],
+    presupuesto: 0
   }
 ];
+
+const clientes = [
+  {
+    id: 1, nombre: "John", apellido: "Doe", tel: "123456678"
+  }
+]
 
 //sacar estado de vehiculo y ponerselo a trabajos.
 
 app.get('/api/lista', (req,res) => {
-  // CONSULTA A BASE DE DATOS
+  
   res.json(lista);
 })
 
 app.get('/api/trabajos', (req,res) => {
-  // CONSULTA A BASE DE DATOS
+  
   res.json(trabajos);
 })
 
 app.get('/api/vehiculos', (req,res) => {
-  // CONSULTA A BASE DE DATOS
+  
   res.json(vehiculos);
 })
 
 app.get('/api/repuestos', (req,res) => {
-  // CONSULTA A BASE DE DATOS
   res.json(repuestos);
+})
+
+app.get('/api/clientes', (req,res) => {
+  res.json(clientes);
 })
 
 app.get('/api/vehiculos/:patente', (req,res) => {
@@ -80,6 +90,11 @@ app.get('/api/vehiculos/:patente', (req,res) => {
 app.get('/api/lista/:codigo', (req,res) => {
   const listaCopia = lista.filter( e => e.codigo == req.params.codigo )
   
+  res.json(listaCopia);
+})
+
+app.get('/api/clientes/:id', (req,res) => {
+  const listaCopia = clientes.filter( e => e.id == req.params.id )
   res.json(listaCopia);
 })
 
@@ -102,6 +117,11 @@ app.post('/api/setvehiculo', (req,res) => {
   vehiculos.push(req.body);
 })
 
+app.post('/api/setcliente', (req,res) => {
+  req.body.id = Number(req.body.id)
+  clientes.push(req.body);
+})
+
 app.delete('/api/repuestos/:codigo', (req,res) => {
   const listaCodigos = lista.map( e => { return e.codigo } )
   const indice = listaCodigos.indexOf(Number(req.params.codigo))
@@ -114,6 +134,29 @@ app.delete('/api/trabajos/:id', (req,res) => {
   trabajos.splice(indice,1);
 })
 
+app.delete('/api/clientes/:id', (req,res) => {
+  const listaIds = clientes.map( e => { return e.id } )
+  const indice = listaIds.indexOf(Number(req.params.id))
+  clientes.splice(indice,1);
+})
+
+app.patch('/api/updateTrabajo/:id', (req, res) => {
+
+  const body = req.body
+  const copia = trabajos.map( e => e.id == req.params.id );
+      
+  copia.estado = body.estado;
+  
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+/*app.patch('/api/trabajos/:id', (req,res) => {
+  const listaCopia = clientes.filter( e => e.id == req.params.id );
+
+  res.json(listaCopia);
+})
+*/
+

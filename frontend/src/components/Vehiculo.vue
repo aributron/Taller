@@ -4,13 +4,14 @@
         Alta de vehiculo    
         <li v-for="vehiculo in lista" :key="vehiculo.id">
             {{ vehiculo.patente }} {{ vehiculo.modelo }}
-            <button @click="eliminar(vehiculo.id)">Siempre anular</button>
+            <button @click="eliminar(vehiculo.id)">Eliminar</button>
         </li>
         <div>
         <p>
             Id <input type="text" v-model="vehiculo.id" /> 
             Patente <input type="text" v-model="vehiculo.patente" /> 
             Modelo <input type="text" v-model="vehiculo.modelo" />
+            Cliente <input type="text" v-model="vehiculo.clienteId" />
             <button @click="agregar">Agregar vehiculo</button>
         </p>
         </div>
@@ -25,7 +26,7 @@ export default {
   data() {
     return {
       lista: [],
-      vehiculo: { id: 0, patente: "", modelo: ""},
+      vehiculo: { id: 0, patente: "", modelo: "", clienteId: 0},
       mensajeError: "",
     };
   },
@@ -51,11 +52,7 @@ export default {
     },
     eliminar(codigo) {
       try {
-
-        // codigo pasado por Santiago, para revisar, como opcion
-        // this.productos = this.productos.filter(elto => elto.id != idBorrar);
-
-        vendedorService.deleteVendedor(codigo);
+        vehiculoService.deleteVehiculo(codigo);
         const listaCodigos = this.lista.map( e => { return e.codigo } )
         const indice = listaCodigos.indexOf(codigo)
         this.lista.splice(indice,1);
