@@ -3,7 +3,7 @@
     <h2>Login</h2>
     correo <input type="email" v-model="usuario.email" /> password
     <input type="password" v-model="usuario.password" />
-    <button @click="login">Login</button>
+    <button type="button" class="btn btn-dark" @click="login">Login </button>
   </div>
 </template>
 

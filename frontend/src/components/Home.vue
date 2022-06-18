@@ -1,11 +1,12 @@
 <template>
-    
-    <div id = "pepe">
-        <h2>Sistema de taller - Home</h2>            
-    </div>
+    <body>
+        
+        <div>
+            <h2>Sistema de taller - Home</h2>            
+        </div>
+    </body>
            
-    <!-- <body id = "pepe">
-    </body> -->
+    
 </template>
 
 <script>

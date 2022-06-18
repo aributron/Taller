@@ -1,5 +1,6 @@
 <template>
-
+  <body>
+    
     <div>
     <h2>ABM Clientes</h2>
  <table class="table table-dark table-striped">
@@ -23,29 +24,64 @@
             <td>
                 {{ cliente.apellido }} 
             </td>
-            <button @click="eliminar(cliente.id)">Borrar</button>
+            <button type="button" class="btn btn-dark" @click="eliminar(cliente.id)">Borrar</button>
           </tr>
          
         </tbody>
       </table>
+      <form>
 
-        <p>
-            Id <input type="text" v-model="cliente.id" /> 
-            Nombre <input type="text" v-model="cliente.nombre" /> 
-            Apellido <input type="text" v-model="cliente.apellido" /> 
-            Telefono <input type="text" v-model="cliente.telefono" /> 
-            <button @click="agregar">Agregar cliente</button>
-        </p>
-        {{ mensajeError }}
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Id</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" v-model="cliente.id" class="form-control">
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Nombre</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" v-model="cliente.nombre" class="form-control">
+        </div>
+      </div>
+      
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Apellido</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" v-model="cliente.apellido" class="form-control">
+        </div>
+      </div>
+
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label class="col-form-label">Telefono</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" v-model="cliente.telefono" class="form-control">
+        </div>
+      </div>
+      </form>
+      <div>
+        <button type="button" class="btn btn-dark" @click="agregar">Agregar cliente</button>
+      </div> 
+        
+      {{ mensajeError }}
     </div>
 
+  </body>
 </template>
 
 <script>
 import clienteService from "../services/clienteService.js";
 
 export default {
-    data() {
+  data() {
     return {
       lista: [],      
       cliente: {id: 0, nombre: "", apellido: "", telefono: ""},

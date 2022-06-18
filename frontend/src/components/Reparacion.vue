@@ -4,8 +4,9 @@
 
         <div>
             <input type="text" v-model="pat" />
-            <button @click="buscarVehiculos(pat)"> Buscar </button> 
+            <button class="btn btn-outline-success" type="submit" @click="buscarVehiculos(pat)"> Buscar </button> 
             {{ mensajeError }}
+            
         </div>
 
         <div v-if="listaVehiculos.length != 0">
@@ -59,7 +60,7 @@
             <td>
                 {{ repuesto.nombre }} 
             </td>
-            <button @click="agregar(repuesto)">Agregar</button>
+            <button type="button" class="btn btn-dark" @click="agregar(repuesto)">Agregar</button>
           </tr>
          
         </tbody>
@@ -87,7 +88,7 @@
             <td>
                 {{ repuesto.nombre }} 
             </td>
-            <button @click="eliminar(repuesto)">Eliminar</button>
+            <button type="button" class="btn btn-dark" @click="eliminar(repuesto)">Eliminar</button>
           </tr>
          
         </tbody>
@@ -100,9 +101,8 @@
              Ingresar horas estimadas para el trabajo:
             <br>
             <input type="text" v-model="precioManoDeObra"/>
-            <br>
-            <button @click="completar"> Dar de alta trabajo </button> 
-
+            <br> 
+            <button type="button" class="btn btn-dark" @click="completar"> Dar de alta trabajo </button> 
         </div>
         <br>
     </div>

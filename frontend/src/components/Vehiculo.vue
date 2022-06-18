@@ -1,22 +1,60 @@
 <template>
+  <body id= "bod">
+    
     <div>
-        <h2>Sistema de Taller - Vehiculo</h2>
-        Alta de vehiculo    
+        <h2>Alta de vehiculos</h2>
+    </div>
+        lista de vehiculos:    
         <li v-for="vehiculo in lista" :key="vehiculo.id">
             {{ vehiculo.patente }} {{ vehiculo.modelo }}
-            <button @click="eliminar(vehiculo.id)">Eliminar</button>
+            <button type="button" class="btn btn-dark" @click="eliminar(vehiculo.id)"> Eliminar </button>
         </li>
-        <div>
-        <p>
-            Id <input type="text" v-model="vehiculo.id" /> 
-            Patente <input type="text" v-model="vehiculo.patente" /> 
-            Modelo <input type="text" v-model="vehiculo.modelo" />
-            Cliente <input type="text" v-model="vehiculo.clienteId" />
-            <button @click="agregar">Agregar vehiculo</button>
-        </p>
-        </div>
+        
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label class="col-form-label">Id</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" v-model="vehiculo.id" class="form-control">
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label class="col-form-label">Patente</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" v-model="vehiculo.patente" class="form-control">
+            </div>
+            <div class="col-auto">
+              <span class="form-text">
+                Must be 6-7 characters long, without spaces.
+              </span>
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label class="col-form-label">Modelo</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" v-model="vehiculo.modelo" class="form-control">
+            </div>
+          </div>
+
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label class="col-form-label">Id del cliente</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" v-model="vehiculo.clienteId" class="form-control">
+            </div>
+          </div>      
+          <div>
+            <button type="button" class="btn btn-dark" @click="agregar"> Agregar vehiculo </button>
+          </div>
         {{ mensajeError }}
-    </div>
+  </body>
 </template>
 
 <script>
@@ -66,3 +104,9 @@ export default {
   },
 };
 </script>
+
+<style>
+    #bod {
+      background-color: lavender;
+    }
+</style>

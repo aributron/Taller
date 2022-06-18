@@ -36,7 +36,8 @@
             <td>
                 {{ trabajo.vehiculo.clienteId }}
             </td>
-            <button @click="finalizar(trabajo)">Finalizar</button>
+            
+            <button type="button" class="btn btn-dark" @click="finalizar(trabajo)">Finalizar</button>
           </tr>
          
         </tbody>
@@ -94,16 +95,16 @@ export default {
       return listaAux;
     },
     async getClienteId(){
-      console.log('hola');
+      
       const cliente = await this.getClienteId(this.trabajo.vehiculo.clienteId);
-      //const cliente = await clienteService.getCliente(num);
+    
       return cliente;
     },
     finalizar(trab) {
     
       try {
         const indice = this.trabajos.indexOf(trab)
-        this.trabajos[indice].estado = "finalizado";
+        this.trabajos[indice].estado = "Finalizado";
         
 
       } catch (error) {

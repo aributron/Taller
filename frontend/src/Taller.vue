@@ -1,24 +1,60 @@
 
 <template>
-  <div>
-    <div id = "banner2">
-      <router-link to="/">Go to Home</router-link>|
-          <div v-if="!estaLogeado">
-              <router-link to="/login">Login</router-link> |
+<body>
+  <header>
+  </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">TallerORT</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      <div v-if="estaLogeado">
+                          <a class="nav-link" href="/#/cliente"> Cliente </a>
+                      </div>
+                      <div v-if="estaLogeado">
+                          <a class="nav-link" href="/#/reparacion">Reparacion</a>
+                      </div> 
+                      <div v-if="estaLogeado">   
+                          <a class="nav-link" href="/#/vehiculo"> Vehiculo </a>
+                      </div>
+                      <div v-if="estaLogeado">
+                          <a class="nav-link" href="/#/trabajoporhacer">Trabajo por hacer</a>
+                      </div>
+                      <div v-if="!estaLogeado">
+                          <a class="nav-link" href="/#/login">Login</a>
+                      </div>
+                      <div v-else>
+                          <a class="nav-link" href="/#/logout">Logout</a>
+                      </div>    
+              </div>
           </div>
-          <div v-if="estaLogeado">
-              <div class="cab_nav">              
-                  <router-link to="/cliente">Cliente</router-link>|
-                  <router-link to="/reparacion">Reparacion</router-link>|
-                  <router-link to="/vehiculo">Vehiculo </router-link>|
-                  <router-link to="/trabajoporhacer">Trabajo por hacer </router-link>| 
-                  <router-link to="/logout">Logout</router-link>                   
-              </div>  
-          </div>
-      <router-view></router-view>
-    </div>
+      </div>
+    </nav>
+  
+  <section>
+  <router-view>
 
-  </div>
+  </router-view>
+
+  </section>
+  <article>
+
+  </article>
+  
+  <footer id="foot">
+    <div class="container">
+        <h1>¡Suscribite para enterarte de todo lo nuevo!</h1>
+        <form>
+            <a class="my-5 btn btn-outline-primary btn-lg" >Suscribirse</a>
+        </form>
+    </div>
+        <p> Sistema taller ORT </p>
+  </footer>
+</body>
 </template>
 
 <script>
@@ -50,11 +86,11 @@ export default {
 <style>
 
 #pepe {
-  background: #000000
+  background-color: #000000
 }
 #banner2{
 
-    background-color: rgb(38, 116, 3);
+    background-color: black;
   
     background-size: cover;
   
@@ -62,5 +98,15 @@ export default {
   
 }
 
+#foot{
+  color: black;
+  background-color: whitesmoke;
+  text-align: left;
+  padding: 20%;
+  
+}
+#newsletter{
+  background-color:aqua;
+}
 
 </style>
