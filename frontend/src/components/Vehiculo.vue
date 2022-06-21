@@ -9,15 +9,6 @@
             {{ vehiculo.patente }} {{ vehiculo.modelo }}
             <button type="button" class="btn btn-dark" @click="eliminar(vehiculo.id)"> Eliminar </button>
         </li>
-        
-          <div class="row g-3 align-items-center">
-            <div class="col-auto">
-              <label class="col-form-label">Id</label>
-            </div>
-            <div class="col-auto">
-              <input type="text" v-model="vehiculo.id" class="form-control">
-            </div>
-          </div>
 
           <div class="row g-3 align-items-center">
             <div class="col-auto">
@@ -41,15 +32,7 @@
               <input type="text" v-model="vehiculo.modelo" class="form-control">
             </div>
           </div>
-
-          <div class="row g-3 align-items-center">
-            <div class="col-auto">
-              <label class="col-form-label">Id del cliente</label>
-            </div>
-            <div class="col-auto">
-              <input type="text" v-model="vehiculo.clienteId" class="form-control">
-            </div>
-          </div>      
+      
           <div>
             <button type="button" class="btn btn-dark" @click="agregar"> Agregar vehiculo </button>
           </div>
@@ -59,6 +42,7 @@
 
 <script>
 import vehiculoService from "../services/vehiculoService.js";
+import clienteService from "../services/clienteService.js";
 
 export default {
   data() {
@@ -66,6 +50,7 @@ export default {
       lista: [],
       vehiculo: { id: 0, patente: "", modelo: "", clienteId: 0},
       mensajeError: "",
+      listaClientes: []
     };
   },
   created: async function () {
@@ -78,8 +63,11 @@ export default {
     }
   },
   methods: {
-    agregar() {
+    async agregar() {
       try {
+        this.vehiculo.id = this.lista.length+1;
+        this.vehiculo.clienteId = await this.getClienteId();
+        console.log(this.vehiculo.clienteId);
         const obj = {...this.vehiculo};
         vehiculoService.setVehiculo(obj); 
         this.lista.push(obj);
@@ -100,6 +88,13 @@ export default {
         console.log(error.error);
       }
 
+    },
+    async getClienteId() {
+      const rta = await clienteService.getClientes();
+      
+      const clientes = rta.data;
+      const id = clientes[clientes.length-1].id;
+      return id;
     }
   },
 };

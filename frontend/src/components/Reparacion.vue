@@ -5,8 +5,8 @@
         <div>
             <input type="text" v-model="pat" />
             <button class="btn btn-outline-success" type="submit" @click="buscarVehiculos(pat)"> Buscar </button> 
-            {{ mensajeError }}
             
+            {{ mensajeError }}
         </div>
 
         <div v-if="listaVehiculos.length != 0">
@@ -174,8 +174,11 @@ export default {
       const rta = await vehiculoService.getVehiculos();
       
       this.listaVehiculos = rta.data.filter( e => e.patente == pat );
+      if (listaVehiculos.length == 0) 
+        this.mensajeError = "No se encontró el vehiculo";
+      
     } catch (error) {
-      this.mensajeError = "No se encontro el vehiculo";
+      this.mensajeError = "No se encontró el vehiculo";
       console.log(error.error);
     }
     },

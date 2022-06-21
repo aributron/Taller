@@ -2,8 +2,8 @@
   <body>
     
     <div>
-    <h2>ABM Clientes</h2>
- <table class="table table-dark table-striped">
+      <h2>Alta-baja de clientes</h2>
+      <table class="table table-dark table-striped">
          <thead>
             <tr>
                 <th>
@@ -30,15 +30,6 @@
         </tbody>
       </table>
       <form>
-
-      <div class="row g-3 align-items-center">
-        <div class="col-auto">
-          <label class="col-form-label">Id</label>
-        </div>
-        <div class="col-auto">
-          <input type="text" v-model="cliente.id" class="form-control">
-        </div>
-      </div>
 
       <div class="row g-3 align-items-center">
         <div class="col-auto">
@@ -100,9 +91,11 @@ export default {
   methods: {
     agregar() {
       try {
+        this.cliente.id = this.lista.length+1;
         const obj = {...this.cliente};
         clienteService.setCliente(obj); 
         this.lista.push(obj);
+        this.$router.push("/vehiculo");
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";
         console.log(error.error);

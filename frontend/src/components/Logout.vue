@@ -1,8 +1,12 @@
 <template>
-  <div>
-    <h2>Logout</h2>
-    <button type="button" class="btn btn-dark" @click="logout">Salir</button>
-  </div>
+  <body>
+    
+    <div>
+      <h2>Logout</h2>
+      <p>¿Está seguro que quiere continuar?</p>
+      <button type="button" class="btn btn-dark" @click="logout">Salir</button>
+    </div>
+  </body>
 </template>
 
 <script>

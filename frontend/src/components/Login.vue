@@ -1,10 +1,30 @@
 <template>
+<body>
+  
   <div>
     <h2>Login</h2>
-    correo <input type="email" v-model="usuario.email" /> password
-    <input type="password" v-model="usuario.password" />
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <label class="col-form-label">Ingrese su correo:</label>
+      </div>
+      <div class="col-auto">
+        <input type="email" v-model="usuario.email" class="form-control">
+      </div>
+    </div>
+
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <label class="col-form-label">Contraseña:</label>
+      </div>
+      <div class="col-auto">
+        <input type="password" v-model="usuario.password" class="form-control">
+      </div>
+    </div>
+
     <button type="button" class="btn btn-dark" @click="login">Login </button>
+    {{ error.msg }}
   </div>
+</body>
 </template>
 
 <script>
@@ -26,19 +46,20 @@ export default {
   data() {
     return {
       usuario: { email: "", password: "" },
+      error: {msg: ""}
     };
   },
   methods: {
       
     async login() {
-      //const loggedIn = localStorage.getItem('usuario');
+      
       const copiaUsuario = { ...this.usuario };
       await this.login(copiaUsuario);
-      console.log(this.estaLogeado);
+     
       if (this.estaLogeado) {
-        this.$router.push("/vehiculo");
-      } else {
         this.$router.push("/");
+      } else {
+        this.error.msg = "Incorrect user or password"
       }
     },
   },
