@@ -23,17 +23,12 @@ app.post('/api/login', (req,res) => {
 
 })
 
-
 // simulo una base de datos en memoria
-// vendedores
-
-const lista = [
-  {codigo:100,nombre:"Correa de distribucion", precio: 12500},
-  {codigo:101,nombre:"Bateria", precio: 6000}
-];
 
 const vehiculos = [
-  {id:0, patente: "ABC123", modelo: "Gol", clienteId: 1}
+  {id:1, patente: "ABC123", modelo: "Gol", clienteId: 1},
+  {id:2, patente: "EEE111", modelo: "Corsa", clienteId: 2},
+  {id:3, patente: "CCC333", modelo: "Uno", clienteId: 3}
 ];
 
 const repuestos = [
@@ -50,24 +45,21 @@ const trabajos = [
     vehiculo: {id:0, patente: "ABC123", modelo: "Gol"}, 
     estado: "En proceso",
     repuestos: [{codigo: 2, nombre: "Radiador", precio: 2500}],
-    presupuesto: 4500
+    total: 4500
   }
 ];
 
 const clientes = [
   {
-    id: 1, nombre: "John", apellido: "Doe", tel: "1234566789",
-    id: 2, nombre: "Juan", apellido: "Dominguez", tel: "1234567891",
+    id: 1, nombre: "John", apellido: "Doe", tel: "1234566789"
+  },
+  {
+    id: 2, nombre: "Juan", apellido: "Dominguez", tel: "1234567891"
+  },
+  {
     id: 3, nombre: "Tito", apellido: "ElBambino", tel: "1234566987"
   }
 ]
-
-//sacar estado de vehiculo y ponerselo a trabajos.
-
-app.get('/api/lista', (req,res) => {
-  
-  res.json(lista);
-})
 
 app.get('/api/trabajos', (req,res) => {
   
@@ -89,12 +81,6 @@ app.get('/api/clientes', (req,res) => {
 
 app.get('/api/vehiculos/:patente', (req,res) => {
   const listaCopia = vehiculos.filter( e => e.patente == req.params.patente )
-  res.json(listaCopia);
-})
-
-app.get('/api/lista/:codigo', (req,res) => {
-  const listaCopia = lista.filter( e => e.codigo == req.params.codigo )
-  
   res.json(listaCopia);
 })
 
@@ -151,13 +137,11 @@ app.delete('/api/vehiculos/:id', (req,res) => {
   vehiculos.splice(indice,1);
 })
 
-app.patch('/api/updateTrabajo', (req,res) => {
-
-  const body = req.body
-  const copia = trabajos.map( e => e.id == body.id );
-      
-  copia.estado = body.estado;
+app.patch('/api/updateTrabajo/:id', (req,res) => {
   
+  const listaIds = trabajos.map( e => { return e.id } )
+  const indice = listaIds.indexOf(Number(req.params.id))
+  trabajos[indice].estado = "Finalizado";
 })
 
 app.listen(port, () => {

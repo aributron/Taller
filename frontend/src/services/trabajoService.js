@@ -20,8 +20,7 @@ export default {
     deleteTrabajo(id) {
         return apiClient.delete('/api/trabajo/' + id);
     },
-    modificarTrabajo(trabajo) {
-        
-        return apiClient.patch('/api/updateTrabajo', trabajo)
+    modificarTrabajo(id) {
+        return apiClient.patch('/api/updateTrabajo/:id');
     }
 }

@@ -74,7 +74,6 @@ export default {
 
           this.vehiculo.id = this.lista.length+1;
           this.vehiculo.clienteId = await this.getClienteId();
-          console.log(this.vehiculo.clienteId);
           const obj = {...this.vehiculo};
           vehiculoService.setVehiculo(obj); 
           this.lista.push(obj);

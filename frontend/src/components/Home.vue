@@ -5,28 +5,6 @@
             <h2>Home</h2>            
         </div>
 
-        <!-- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="https://i.bstr.es/highmotor/2018/09/car-1751753_1920-880x660.jpg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2018/03/12/5f15f3de2a610.jpeg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8fERoaUnH3kL5DvFLc8UHsEH4oE5Ve8Dy6g&usqp=CAU" alt="Third slide">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-        </div> -->
-
         <div id="demo" class="carousel slide" data-ride="carousel">
 
         <!-- Indicators -->

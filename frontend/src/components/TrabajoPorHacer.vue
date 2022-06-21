@@ -57,7 +57,7 @@ export default {
     return {
       trabajos: [],
       trabajo: 
-      { id: 1, 
+      { id: 0, 
         vehiculo: {id:0, patente: "", modelo: "", clienteId: 0}, 
         estado: "En proceso",
         repuestos: [],
@@ -83,7 +83,7 @@ export default {
         const copiaVehiculo = {...this.vehiculo};
         this.agregarVehiculo(copiaVehiculo);
 
-      }catch(error){
+      } catch(error){
         console.log(error);
       }
 
@@ -102,9 +102,10 @@ export default {
     async finalizar(trab) {
     
       try {
-        const indice = this.trabajos.indexOf(trab)
+        const indice = this.trabajos.indexOf(trab);
+        
+        //await trabajoService.modificarTrabajo(trab.id);
         this.trabajos[indice].estado = "Finalizado";
-        await trabajoService.modificarTrabajo(this.trabajos[indice]);
 
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";

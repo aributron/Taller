@@ -151,7 +151,7 @@ export default {
       try {
         const trabajos = await trabajoService.getTrabajos();
         this.trabajo.id = trabajos.data.length+1;
-        console.log(this.trabajo.id);
+        
         this.listaStore.push(obj);
         this.calcular(obj.precio); 
       } catch (error) {
