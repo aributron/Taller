@@ -1,7 +1,7 @@
 <template>
   <body>
     
-    <div>
+    <div id = "tab">
       <h2>Alta-baja de clientes</h2>
       <table class="table table-dark table-striped">
          <thead>
@@ -56,6 +56,11 @@
         <div class="col-auto">
           <input type="text" v-model="cliente.telefono" class="form-control">
         </div>
+        <div class="col-auto">
+          <span class="form-text">
+             Must be 10 characters long, without spaces.
+          </span>
+        </div>
       </div>
       </form>
       <div>
@@ -90,12 +95,20 @@ export default {
   },
   methods: {
     agregar() {
+      const CARACT_TEL = 10;
       try {
+        if (this.cliente.nombre.length != 0 &&
+            this.cliente.apellido.length != 0 &&
+            this.cliente.telefono.length == CARACT_TEL ) {
+
         this.cliente.id = this.lista.length+1;
         const obj = {...this.cliente};
         clienteService.setCliente(obj); 
         this.lista.push(obj);
         this.$router.push("/vehiculo");
+        } else {
+           this.mensajeError = "Datos inválidos ";
+        }
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";
         console.log(error.error);
@@ -117,3 +130,7 @@ export default {
   }
 }
 </script>
+
+<style>
+  
+</style>

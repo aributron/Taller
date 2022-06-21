@@ -22,7 +22,7 @@
                           <a class="nav-link" href="/#/vehiculo"> Vehiculo </a>
                       </div>
                       <div v-if="estaLogeado">
-                          <a class="nav-link" href="/#/trabajoporhacer">Trabajo por hacer</a>
+                          <a class="nav-link" href="/#/trabajoporhacer">Trabajos</a>
                       </div>
                       <div v-if="!estaLogeado">
                           <a class="nav-link" href="/#/login">Login</a>

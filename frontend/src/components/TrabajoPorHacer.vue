@@ -1,7 +1,7 @@
 <template>
   <!-- MUESTRA EL AUTO, LOS REPUESTOS (Y SI ESTAN INSTALADOS O NO), EL ESTADO DEL AUTO EN GENERAL (TODOS EN UN OBJ TRABAJO) -->
-  <div>
-  <h1>Trabajo por hacer</h1>
+  <div id = "tab">
+  <h1>Trabajos</h1>
 
       <table class="table table-dark table-striped">
         <thead>
@@ -50,7 +50,6 @@
 <script>
 
 import trabajoService from "../services/trabajoService.js";
-import clienteService from "../services/clienteService.js";
 
 export default {
   
@@ -100,12 +99,12 @@ export default {
     
       return cliente;
     },
-    finalizar(trab) {
+    async finalizar(trab) {
     
       try {
         const indice = this.trabajos.indexOf(trab)
         this.trabajos[indice].estado = "Finalizado";
-        
+        await trabajoService.modificarTrabajo(this.trabajos[indice]);
 
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";

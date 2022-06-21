@@ -21,7 +21,7 @@ export default {
         return apiClient.delete('/api/trabajo/' + id);
     },
     modificarTrabajo(trabajo) {
-        // chequear
-        return apiClient.put('/api/settrabajo', trabajo)
+        
+        return apiClient.patch('/api/updateTrabajo', trabajo)
     }
 }

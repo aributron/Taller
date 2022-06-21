@@ -39,21 +39,26 @@ const vehiculos = [
 const repuestos = [
   {codigo: 1, nombre: "Correa de distribucion", precio: 3000},
   {codigo: 2, nombre: "Radiador", precio: 2500},
-  {codigo: 3, nombre: "Volante", precio: 2800}
+  {codigo: 3, nombre: "Volante", precio: 2800},
+  {codigo: 4, nombre: "Bujia", precio: 3200},
+  {codigo: 5, nombre: "Aceite", precio: 1000},
+  {codigo: 6, nombre: "Caño de escape", precio: 5000}
 ];
 
 const trabajos = [
-  { id: 1, 
+  { id: 0, 
     vehiculo: {id:0, patente: "ABC123", modelo: "Gol"}, 
     estado: "En proceso",
-    repuestos: [],
-    presupuesto: 0
+    repuestos: [{codigo: 2, nombre: "Radiador", precio: 2500}],
+    presupuesto: 4500
   }
 ];
 
 const clientes = [
   {
-    id: 1, nombre: "John", apellido: "Doe", tel: "123456678"
+    id: 1, nombre: "John", apellido: "Doe", tel: "1234566789",
+    id: 2, nombre: "Juan", apellido: "Dominguez", tel: "1234567891",
+    id: 3, nombre: "Tito", apellido: "ElBambino", tel: "1234566987"
   }
 ]
 
@@ -140,10 +145,16 @@ app.delete('/api/clientes/:id', (req,res) => {
   clientes.splice(indice,1);
 })
 
-app.patch('/api/updateTrabajo/:id', (req, res) => {
+app.delete('/api/vehiculos/:id', (req,res) => {
+  const listaIds = vehiculos.map( e => { return e.id } )
+  const indice = listaIds.indexOf(Number(req.params.id))
+  vehiculos.splice(indice,1);
+})
+
+app.patch('/api/updateTrabajo', (req,res) => {
 
   const body = req.body
-  const copia = trabajos.map( e => e.id == req.params.id );
+  const copia = trabajos.map( e => e.id == body.id );
       
   copia.estado = body.estado;
   
@@ -154,7 +165,7 @@ app.listen(port, () => {
 })
 
 /*app.patch('/api/trabajos/:id', (req,res) => {
-  const listaCopia = clientes.filter( e => e.id == req.params.id );
+  const listaCopia = trabajos.filter( e => e.id == req.params.id );
 
   res.json(listaCopia);
 })

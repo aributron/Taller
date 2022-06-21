@@ -27,7 +27,7 @@ export default {
         return apiClient.post('/api/setvehiculo', vehiculo);
     },
     deleteVehiculo(codigo) {
-        return apiClient.delete('/api/vehiculo/' + codigo);
+        return apiClient.delete('/api/vehiculos/:codigo');
     },
     modificarVehiculo(vehiculo) {
         // chequear

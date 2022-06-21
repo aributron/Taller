@@ -65,14 +65,24 @@ export default {
   methods: {
     async agregar() {
       try {
-        this.vehiculo.id = this.lista.length+1;
-        this.vehiculo.clienteId = await this.getClienteId();
-        console.log(this.vehiculo.clienteId);
-        const obj = {...this.vehiculo};
-        vehiculoService.setVehiculo(obj); 
-        this.lista.push(obj);
+        const patente = await vehiculoService.getVehiculosPorPatente(this.vehiculo.patente);
+        const pat = this.vehiculo.patente;
+        if (patente.data.length == 0 &&
+            (pat.length == 6 ||
+            pat.length == 7 ) &&
+            this.vehiculo.modelo.length != 0) {
+
+          this.vehiculo.id = this.lista.length+1;
+          this.vehiculo.clienteId = await this.getClienteId();
+          console.log(this.vehiculo.clienteId);
+          const obj = {...this.vehiculo};
+          vehiculoService.setVehiculo(obj); 
+          this.lista.push(obj);
+        } else {
+          this.mensajeError = "Patente existente o dato inválido";
+        }
       } catch (error) {
-        this.mensajeError = "No se pudo obtener los datos ";
+        this.mensajeError = "Patente existente o dato inválido";
         console.log(error.error);
       }
     },
@@ -103,5 +113,8 @@ export default {
 <style>
     #bod {
       background-color: lavender;
+      padding: 20px;
     }
 </style>
+  
+  

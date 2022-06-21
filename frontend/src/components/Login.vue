@@ -1,7 +1,7 @@
 <template>
 <body>
   
-  <div>
+  <div id = "tab">
     <h2>Login</h2>
     <div class="row g-3 align-items-center">
       <div class="col-auto">
@@ -12,9 +12,11 @@
       </div>
     </div>
 
+    
+
     <div class="row g-3 align-items-center">
       <div class="col-auto">
-        <label class="col-form-label">Contraseña:</label>
+        <label class="col-form-label">Ingrese contraseña:</label>
       </div>
       <div class="col-auto">
         <input type="password" v-model="usuario.password" class="form-control">
@@ -67,4 +69,7 @@ export default {
 </script>
 
 <style>
+  #tab {
+    padding: 20px;
+  }
 </style>

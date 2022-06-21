@@ -1,12 +1,12 @@
 
 <template>
-    <div>
+    <div id = "tab">
 
         <div>
             <input type="text" v-model="pat" />
             <button class="btn btn-outline-success" type="submit" @click="buscarVehiculos(pat)"> Buscar </button> 
+                 {{ mensajeError }}
             
-            {{ mensajeError }}
         </div>
 
         <div v-if="listaVehiculos.length != 0">
@@ -104,6 +104,7 @@
             <br> 
             <button type="button" class="btn btn-dark" @click="completar"> Dar de alta trabajo </button> 
         </div>
+        {{ mensajeError2 }}
         <br>
     </div>
 </template>
@@ -130,6 +131,7 @@ export default {
         presupuesto: 0
       },   
       mensajeError: "",
+      mensajeError2: "",
       precioTotal: 0,
       precioManoDeObra: 0
     };
@@ -145,10 +147,13 @@ export default {
   },
   
   methods: {
-    agregar(obj) {
+    async agregar(obj) {
       try {
+        const trabajos = await trabajoService.getTrabajos();
+        this.trabajo.id = trabajos.data.length+1;
+        console.log(this.trabajo.id);
         this.listaStore.push(obj);
-        this.calcular(obj.precio);
+        this.calcular(obj.precio); 
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";
         console.log(error.error);
@@ -185,18 +190,22 @@ export default {
     completar () {
       try {
         
-        const vehiculo = this.listaVehiculos[0];
-        const rep = this.listaStore;
-        const manoDeObra = this.precioManoDeObra;
-        const precioPorHora = this.calcularPorHora(manoDeObra);
-        const total = this.precioTotal+=precioPorHora;
-        const obj = {id: this.cantTrabajos, vehiculo, estado: "en proceso", rep, total};
+        if (this.precioManoDeObra != 0) {
+          const vehiculo = this.listaVehiculos[0];
+          const rep = this.listaStore;
+          const manoDeObra = this.precioManoDeObra;
+          const precioPorHora = this.calcularPorHora(manoDeObra);
+          const total = this.precioTotal+=precioPorHora;
+          const obj = {id: this.cantTrabajos, vehiculo, estado: "en proceso", rep, total};
 
-        trabajoService.setTrabajo(obj); 
-        this.cantTrabajos++;
-        const fecha = new Date().toDateString();
-        const mensajeRecibo = `Imprimiendo recibo...\n\tFecha: ${fecha} \n\tAuto: ${vehiculo.patente} \n\tPresupuesto total de repuestos: $${this.precioTotal}`;
-        alert(mensajeRecibo); 
+          trabajoService.setTrabajo(obj); 
+          this.cantTrabajos++;
+          const fecha = new Date().toDateString();
+          const mensajeRecibo = `Imprimiendo recibo...\n\tFecha: ${fecha} \n\tAuto: ${vehiculo.patente} \n\tPresupuesto total de repuestos: $${this.precioTotal}`;
+          alert(mensajeRecibo); 
+        } else {
+          this.mensajeError2 = "No puede ser 0 ";
+        }
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";
         console.log(error.error);
