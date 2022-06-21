@@ -50,7 +50,8 @@ export default {
       lista: [],
       vehiculo: { id: 0, patente: "", modelo: "", clienteId: 0},
       mensajeError: "",
-      listaClientes: []
+      listaClientes: [],
+      listaAux: []
     };
   },
   created: async function () {
@@ -71,7 +72,7 @@ export default {
             (pat.length == 6 ||
             pat.length == 7 ) &&
             this.vehiculo.modelo.length != 0) {
-
+          
           this.vehiculo.id = this.lista.length+1;
           this.vehiculo.clienteId = await this.getClienteId();
           const obj = {...this.vehiculo};

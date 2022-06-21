@@ -1,7 +1,7 @@
 <template>
   <!-- MUESTRA EL AUTO, LOS REPUESTOS (Y SI ESTAN INSTALADOS O NO), EL ESTADO DEL AUTO EN GENERAL (TODOS EN UN OBJ TRABAJO) -->
   <div id = "tab">
-  <h1>Trabajos</h1>
+  <h2>Trabajos</h2>
 
       <table class="table table-dark table-striped">
         <thead>

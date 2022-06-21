@@ -82,6 +82,7 @@ app.get('/api/clientes', (req,res) => {
 app.get('/api/vehiculos/:patente', (req,res) => {
   const listaCopia = vehiculos.filter( e => e.patente == req.params.patente )
   res.json(listaCopia);
+  
 })
 
 app.get('/api/clientes/:id', (req,res) => {

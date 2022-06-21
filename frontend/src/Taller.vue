@@ -15,12 +15,12 @@
                       <div v-if="estaLogeado">
                           <a class="nav-link" href="/#/cliente"> Cliente </a>
                       </div>
-                      <div v-if="estaLogeado">
-                          <a class="nav-link" href="/#/reparacion">Reparacion</a>
-                      </div> 
                       <div v-if="estaLogeado">   
                           <a class="nav-link" href="/#/vehiculo"> Vehiculo </a>
                       </div>
+                      <div v-if="estaLogeado">
+                          <a class="nav-link" href="/#/reparacion">Reparacion</a>
+                      </div> 
                       <div v-if="estaLogeado">
                           <a class="nav-link" href="/#/trabajoporhacer">Trabajos</a>
                       </div>
@@ -108,5 +108,7 @@ export default {
 #newsletter{
   background-color:aqua;
 }
+
+h2 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 20px; font-weight: bold; letter-spacing: -1px; line-height: 1; }
 
 </style>
