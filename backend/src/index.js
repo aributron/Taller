@@ -80,9 +80,8 @@ app.get('/api/clientes', (req,res) => {
 })
 
 app.get('/api/vehiculos/:patente', (req,res) => {
-  const listaCopia = vehiculos.filter( e => e.patente == req.params.patente )
+  const listaCopia = vehiculos.filter( e => e.patente == req.params.patente );
   res.json(listaCopia);
-  
 })
 
 app.get('/api/clientes/:id', (req,res) => {
@@ -148,11 +147,4 @@ app.patch('/api/updateTrabajo/:id', (req,res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-/*app.patch('/api/trabajos/:id', (req,res) => {
-  const listaCopia = trabajos.filter( e => e.id == req.params.id );
-
-  res.json(listaCopia);
-})
-*/
 

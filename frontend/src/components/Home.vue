@@ -1,7 +1,7 @@
 <template>
     <body>
         
-        <div>
+        <div id = "tab">
             <h2>Home</h2>            
         </div>
 

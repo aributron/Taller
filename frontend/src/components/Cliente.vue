@@ -63,6 +63,7 @@
         </div>
       </div>
       </form>
+      <br>
       <div>
         <button type="button" class="btn btn-dark" @click="agregar">Agregar cliente</button>
       </div> 

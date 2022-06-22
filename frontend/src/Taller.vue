@@ -49,7 +49,7 @@
     <div class="container">
         <h1>¡Suscribite para enterarte de todo lo nuevo!</h1>
         <form>
-            <a class="my-5 btn btn-outline-primary btn-lg" >Suscribirse</a>
+            <a @click="sub" class="my-5 btn btn-outline-primary btn-lg" >Suscribirse</a>
         </form>
     </div>
         <p> Sistema taller ORT </p>
@@ -78,6 +78,9 @@ export default {
     };
   },
   methods: {
+    sub(){
+      alert('¡Gracias por suscribirte! Te va a estar llegando un mail de bienvenida.');
+    }
   },
 };
 </script>

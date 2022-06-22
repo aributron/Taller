@@ -32,7 +32,7 @@
               <input type="text" v-model="vehiculo.modelo" class="form-control">
             </div>
           </div>
-      
+          <br>
           <div>
             <button type="button" class="btn btn-dark" @click="agregar"> Agregar vehiculo </button>
           </div>
@@ -83,7 +83,7 @@ export default {
         }
       } catch (error) {
         this.mensajeError = "Patente existente o dato inválido";
-        console.log(error.error);
+        console.log(error);
       }
     },
     eliminar(codigo) {
