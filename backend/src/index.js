@@ -137,11 +137,19 @@ app.delete('/api/vehiculos/:id', (req,res) => {
   vehiculos.splice(indice,1);
 })
 
-app.patch('/api/updateTrabajo/:id', (req,res) => {
-  
-  const listaIds = trabajos.map( e => { return e.id } )
-  const indice = listaIds.indexOf(Number(req.params.id))
-  trabajos[indice].estado = "Finalizado";
+app.patch('/api/updateTrabajo/:patente', (req,res) => {
+  try {
+
+    const listaPatentes = trabajos.map( e => { return e.vehiculo.patente } )
+    const listaIds = trabajos.map( e => { return e.id } )
+    const indice = listaPatentes.indexOf(Number(req.params.patente))
+    const indice2 = listaIds.indexOf(Number(indice))
+    console.log(req.params.patente)
+    trabajos[indice].estado = "Finalizado";
+
+  } catch (err) {
+    console.log (err)
+  }
 })
 
 app.listen(port, () => {

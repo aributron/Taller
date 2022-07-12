@@ -182,15 +182,15 @@ export default {
       if (listaVehiculos.length == 0) 
         this.mensajeError = "No se encontró el vehiculo";
       
-    } catch (error) {
+      } catch (error) {
       this.mensajeError = "No se encontró el vehiculo";
       console.log(error.error);
-    }
+      }
     },
     completar () {
       try {
         
-        if (this.precioManoDeObra != 0) {
+        if (this.precioManoDeObra > 0) {
           const vehiculo = this.listaVehiculos[0];
           const rep = this.listaStore;
           const manoDeObra = this.precioManoDeObra;
@@ -203,8 +203,9 @@ export default {
           const fecha = new Date().toDateString();
           const mensajeRecibo = `Imprimiendo recibo...\n\tFecha: ${fecha} \n\tAuto: ${vehiculo.patente} \n\tPresupuesto total de repuestos: $${this.precioTotal}`;
           alert(mensajeRecibo); 
+          this.$router.push("/trabajoporhacer");
         } else {
-          this.mensajeError2 = "No puede ser 0 ";
+          this.mensajeError2 = "Tiene que ser mas de 1";
         }
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";

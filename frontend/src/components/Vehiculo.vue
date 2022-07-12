@@ -4,7 +4,7 @@
     <div>
         <h2>Alta de vehiculos</h2>
     </div>
-        lista de vehiculos:    
+        Lista de vehiculos:    
         <li v-for="vehiculo in lista" :key="vehiculo.id">
             {{ vehiculo.patente }} {{ vehiculo.modelo }}
             <button type="button" class="btn btn-dark" @click="eliminar(vehiculo.id)"> Eliminar </button>
@@ -66,9 +66,10 @@ export default {
   methods: {
     async agregar() {
       try {
-        const patente = await vehiculoService.getVehiculosPorPatente(this.vehiculo.patente);
         const pat = this.vehiculo.patente;
-        if (patente.data.length == 0 &&
+        const patentes = this.lista.filter( e => e.patente == pat );
+    
+        if (patentes.length == 0 &&
             (pat.length == 6 ||
             pat.length == 7 ) &&
             this.vehiculo.modelo.length != 0) {
@@ -105,8 +106,9 @@ export default {
       const clientes = rta.data;
       const id = clientes[clientes.length-1].id;
       return id;
-    }
+    },
   },
+
 };
 </script>
 

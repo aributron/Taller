@@ -58,8 +58,6 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
-import Reparacion from './components/Reparacion.vue'
 import { usuarioStore } from "../src/store/usuario.js";
 import { storeToRefs } from "pinia";
 
