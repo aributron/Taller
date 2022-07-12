@@ -183,7 +183,7 @@ export default {
         this.mensajeError = "No se encontró el vehiculo";
       
       } catch (error) {
-      this.mensajeError = "No se encontró el vehiculo";
+      this.mensajeError = "";
       console.log(error.error);
       }
     },

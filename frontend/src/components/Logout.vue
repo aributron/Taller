@@ -1,7 +1,7 @@
 <template>
   <body>
     
-    <div>
+    <div id = "tab">
       <h2>Logout</h2>
       <p>¿Está seguro que quiere continuar?</p>
       <button type="button" class="btn btn-dark" @click="logout">Salir</button>
@@ -35,4 +35,7 @@ export default {
 </script>
 
 <style>
+#tab {
+  padding: 20px;
+}
 </style>
