@@ -206,7 +206,7 @@ export default {
           alert(mensajeRecibo); 
           this.$router.push("/trabajoporhacer");
         } else {
-          this.mensajeError2 = "Tiene que ser mas de 1";
+          this.mensajeError2 = "Tiene que ser mas de 0";
         }
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";
