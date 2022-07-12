@@ -133,7 +133,8 @@ export default {
       mensajeError: "",
       mensajeError2: "",
       precioTotal: 0,
-      precioManoDeObra: 0
+      precioManoDeObra: 0,
+      pat: ""
     };
   },
   created: async function () {
@@ -179,12 +180,12 @@ export default {
       const rta = await vehiculoService.getVehiculos();
       
       this.listaVehiculos = rta.data.filter( e => e.patente == pat );
-      if (listaVehiculos.length == 0) 
+      if (this.listaVehiculos.length == 0) {
         this.mensajeError = "No se encontró el vehiculo";
+      }
       
       } catch (error) {
-      this.mensajeError = "";
-      console.log(error.error);
+        this.mensajeError = "Contact an admin";
       }
     },
     completar () {

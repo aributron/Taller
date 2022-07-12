@@ -42,7 +42,7 @@ const repuestos = [
 
 const trabajos = [
   { id: 0, 
-    vehiculo: {id:0, patente: "ABC123", modelo: "Gol"}, 
+    vehiculo: {id:0, patente: "ABC123", modelo: "Gol", clienteId: 1}, 
     estado: "en proceso",
     repuestos: [{codigo: 2, nombre: "Radiador", precio: 2500}],
     total: 4500
