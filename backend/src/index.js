@@ -43,7 +43,7 @@ const repuestos = [
 const trabajos = [
   { id: 0, 
     vehiculo: {id:0, patente: "ABC123", modelo: "Gol"}, 
-    estado: "En proceso",
+    estado: "en proceso",
     repuestos: [{codigo: 2, nombre: "Radiador", precio: 2500}],
     total: 4500
   }
@@ -139,16 +139,22 @@ app.delete('/api/vehiculos/:id', (req,res) => {
 
 app.patch('/api/updateTrabajo/:patente', (req,res) => {
   try {
+    let i = 0;
+    let encontre = false;
 
-    const listaPatentes = trabajos.map( e => { return e.vehiculo.patente } )
-    const listaIds = trabajos.map( e => { return e.id } )
-    const indice = listaPatentes.indexOf(Number(req.params.patente))
-    const indice2 = listaIds.indexOf(Number(indice))
-    console.log(req.params.patente)
-    trabajos[indice].estado = "Finalizado";
+    while (i < trabajos.length && !encontre) {
+
+      if (trabajos[i].vehiculo.patente == req.params.patente){
+        trabajos[i].estado = "Finalizado";
+        encontre = true;
+      } else {
+        i++;
+      }
+
+    }
 
   } catch (err) {
-    console.log (err)
+    console.log (err.error)
   }
 })
 

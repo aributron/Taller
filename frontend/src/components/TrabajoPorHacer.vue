@@ -104,9 +104,8 @@ export default {
       try {
         const indice = this.trabajos.indexOf(trab);
         const patente = trab.vehiculo.patente
-        console.log(patente)
-        //await trabajoService.modificarTrabajo(patente);
         this.trabajos[indice].estado = "Finalizado";
+        await trabajoService.modificarTrabajo(patente);
 
       } catch (error) {
         this.mensajeError = "No se pudo obtener los datos ";
