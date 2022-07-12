@@ -23,15 +23,15 @@
                       </div> 
                       <div v-if="estaLogeado">
                           <a class="nav-link" href="/#/trabajoporhacer">Trabajos</a>
-                      </div>
-                      <div v-if="!estaLogeado">
-                          <a class="nav-link" href="/#/login">Login</a>
-                      </div>
-                      <div v-else>
-                          <a class="nav-link" href="/#/logout">Logout</a>
-                      </div>    
+                      </div>   
               </div>
           </div>
+          <div v-if="!estaLogeado">
+            <a class="nav-link" href="/#/login">Login</a>
+          </div>
+          <div v-else>
+            <a class="nav-link" href="/#/logout">Logout</a>
+          </div> 
       </div>
     </nav>
   
